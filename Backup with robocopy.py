@@ -21,7 +21,7 @@ if len(sys.argv) >= 3:
 else:
     destination = ""
 
-# While loop to check for the source
+# Check for the source
 while True:
     if check_path_exist(source) == False:
         source = input("What would you like to backup? Provide the path: ")
@@ -31,11 +31,12 @@ while True:
     else:
         break
 
-# While loop to check for the destination
+# Check for the destination
 while True:
     if check_path_exist(destination) == False:
         drives = os.popen("fsutil fsinfo drives").readlines()
 
+        print("Available drives:")
         for drive in list(drives):
             print(drive.strip())
 
@@ -55,3 +56,5 @@ options = "/E /R:0 /MIR /A-:SH /XD '.git' '.svn' /XF 'desktop.ini' 'Personal Vau
 
 print(f"Backup '{source}' to '{destination_date}'")
 os.system(f"robocopy {source} {destination_date} {options}")
+
+print("Don't forget to make an export from your vault!")
