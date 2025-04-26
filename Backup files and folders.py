@@ -3,7 +3,7 @@ import sys
 from datetime import datetime
 import shutil
 
-exclude_folders_files = [".git", ".svn", "desktop.ini", "Personal Vault.lnk"]
+exclude_folders_files = [".*", ".git", ".svn", "desktop.ini", "Personal Vault.lnk"]
 
 # Check if argument 1 was provided
 if len(sys.argv) >= 2:
