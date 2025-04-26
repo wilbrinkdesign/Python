@@ -1,13 +1,9 @@
 import os
 import sys
 from datetime import datetime
+import shutil
 
-# Function to check if a path exists
-def check_path_exist(path_name):
-    if os.path.exists(path_name):
-        return True
-    else:
-        return False
+exclude_folders_files = [".git", ".svn", "desktop.ini", "Personal Vault.lnk"]
 
 # Check if argument 1 was provided
 if len(sys.argv) >= 2:
@@ -23,17 +19,17 @@ else:
 
 # Check for the source
 while True:
-    if check_path_exist(source) == False:
+    if not os.path.exists(source):
         source = input("What would you like to backup? Provide the path: ")
 
-        if check_path_exist(source) == True:
+        if os.path.exists(source):
             break
     else:
         break
 
 # Check for the destination
 while True:
-    if check_path_exist(destination) == False:
+    if not os.path.exists(destination):
         drives = os.popen("fsutil fsinfo drives").readlines()
 
         print("Available drives:")
@@ -43,7 +39,7 @@ while True:
         print("")
         destination = input("Where do you want to store the backup? Provide the path: ")
         
-        if check_path_exist(destination) == True:
+        if os.path.exists(destination):
             break
     else:
         break
@@ -51,10 +47,9 @@ while True:
 date_today = datetime.now()
 date_folder = date_today.strftime("%Y-%m-%d")
 
-destination_date = f"{destination}\\{date_folder}"
-options = "/E /R:0 /MIR /A-:SH /XD '.git' '.svn' /XF 'desktop.ini' 'Personal Vault.lnk'"
+destination_full = os.path.join(destination, date_folder)
 
-print(f"Backup '{source}' to '{destination_date}'")
-os.system(f"robocopy {source} {destination_date} {options}")
+print(f"Backup '{source}' to '{destination_full}'")
+shutil.copytree(source, destination_full, dirs_exist_ok = True, ignore=shutil.ignore_patterns(*exclude_folders_files))
 
 print("Don't forget to make an export from your vault!")
