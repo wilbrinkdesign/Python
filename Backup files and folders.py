@@ -1,21 +1,17 @@
 import os
-import sys
+import argparse
 from datetime import datetime
 import shutil
 
 exclude_folders_files = [".*", ".git", ".svn", "desktop.ini", "Personal Vault.lnk"]
 
-# Check if argument 1 was provided
-if len(sys.argv) >= 2:
-    source = sys.argv[1]
-else:
-    source = ""
-
-# Check if argument 2 was provided
-if len(sys.argv) >= 3:
-    destination = sys.argv[2]
-else:
-    destination = ""
+# Add option parameters and read the input
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--source", help="Source path",type=str)
+parser.add_argument("-d", "--destination", help="Destination path", type=str)
+args = parser.parse_args()
+source = str(args.source)
+destination = str(args.destination)
 
 # Check for the source
 while True:
