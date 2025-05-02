@@ -7,8 +7,8 @@ exclude_folders_files = [".*", "desktop.ini", "Personal Vault.lnk"]
 
 # Add option parameters and read the input
 parser = argparse.ArgumentParser()
-parser.add_argument("-s", "--source", help="Source path",type=str)
-parser.add_argument("-d", "--destination", help="Destination path", type=str)
+parser.add_argument("-s", "--source", help="Provide a valid source path")
+parser.add_argument("-d", "--destination", help="Provide a valid destination path")
 args = parser.parse_args()
 source = str(args.source)
 destination = str(args.destination)
