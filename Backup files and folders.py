@@ -1,3 +1,12 @@
+"""
+    Backup your data.
+
+    Examples:
+    <file_name>.py
+    <file_name>.py -s "/folder1" -d "/folder2"
+    <file_name>.py --source "C:\" --destination "D:\"
+"""
+
 import os
 import argparse
 from datetime import datetime
