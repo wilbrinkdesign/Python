@@ -3,7 +3,7 @@ import argparse
 from datetime import datetime
 import shutil
 
-exclude_folders_files = [".*", ".git", ".svn", "desktop.ini", "Personal Vault.lnk"]
+exclude_folders_files = [".*", "desktop.ini", "Personal Vault.lnk"]
 
 # Add option parameters and read the input
 parser = argparse.ArgumentParser()
@@ -14,32 +14,20 @@ source = str(args.source)
 destination = str(args.destination)
 
 # Check for the source
-while True:
-    if not os.path.exists(source):
-        source = input("What would you like to backup? Provide the path: ")
-
-        if os.path.exists(source):
-            break
-    else:
-        break
+while not os.path.isdir(source):
+    source = input("What would you like to backup? Provide the path: ")
 
 # Check for the destination
-while True:
-    if not os.path.exists(destination):
-        drives = os.popen("fsutil fsinfo drives").readlines()
+while not os.path.isdir(destination):
+    drives = os.popen("fsutil fsinfo drives").readlines()
 
-        print("Available drives:")
-        for drive in list(drives):
-            print(drive.strip())
+    print("Available drives:")
+    for drive in list(drives):
+        print(drive.strip())
+    print("")
 
-        print("")
-        destination = input("Where do you want to store the backup? Provide the path: ")
-        
-        if os.path.exists(destination):
-            break
-    else:
-        break
-
+    destination = input("Where do you want to store the backup? Provide the path: ")
+    
 date_today = datetime.now()
 date_folder = date_today.strftime("%Y-%m-%d")
 
