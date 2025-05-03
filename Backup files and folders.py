@@ -4,7 +4,7 @@
     Examples:
     <file_name>.py
     <file_name>.py -s "/folder1" -d "/folder2"
-    <file_name>.py --source "C:\" --destination "D:\"
+    <file_name>.py --source "C:\Folder1" --destination "D:\"
 """
 
 import os
