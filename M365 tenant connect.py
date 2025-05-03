@@ -5,7 +5,7 @@
     - Create an App registration
     - Edit API permissions to 'Directory.Read.All'
     - Create a Client secret
-    - Add the value of this secret to an system environment under the name 'M365_Secret'
+    - Add the value of this secret to a system environment under the name 'M365_Secret'
     - Fill in the vars 'tenant_id' and 'app_id' in the script below
 """
 
